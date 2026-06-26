@@ -43,7 +43,7 @@ export default function Hero() {
         </div>
 
         {/* Animated product visual (pure CSS/SVG, decorative) */}
-        <div className="hero__visual" data-reveal="hero" style={{ ["--reveal-delay" as string]: "120ms" }} aria-hidden>
+        <div className="hero__visual" data-reveal="hero" style={{ ["--reveal-delay" as string]: "120ms" }} aria-hidden data-cursor="view" data-cursor-label="Explore">
           <div className="panel">
             <div className="panel__bar">
               <span /><span /><span />

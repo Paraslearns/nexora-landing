@@ -1,8 +1,4 @@
-const STATS = [
-  { value: "4.2B+", label: "records automated daily" },
-  { value: "63%", label: "lower pipeline cost" },
-  { value: "8 min", label: "median time-to-first-flow" },
-];
+import ProofStats from "./ProofStats";
 
 const QUOTES = [
   {
@@ -39,14 +35,7 @@ export default function Testimonials() {
           </h2>
         </header>
 
-        <dl className="proof__stats" data-reveal>
-          {STATS.map((s) => (
-            <div key={s.label} className="proof__stat">
-              <dt>{s.value}</dt>
-              <dd className="muted">{s.label}</dd>
-            </div>
-          ))}
-        </dl>
+        <ProofStats />
 
         <div className="proof__grid">
           {QUOTES.map((q, i) => (

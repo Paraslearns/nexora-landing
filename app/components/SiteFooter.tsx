@@ -37,6 +37,10 @@ export default function SiteFooter() {
           <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookies</a>
         </p>
       </div>
+
+      <div className="footer-word" aria-hidden="true">
+        <span>NEXORA</span>
+      </div>
     </footer>
   );
 }
