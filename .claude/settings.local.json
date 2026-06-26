@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "PowerShell(\"---PACKAGE.JSON---\")",
+      "PowerShell(\"---GLOBALS---\")",
+      "PowerShell(\"---LAYOUT---\")",
+      "PowerShell(npm run build 2>&1)"
     ]
   }
 }

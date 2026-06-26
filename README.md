@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexora — Next-Gen AI Data Automation Platform (Landing Page)
 
-## Getting Started
+A premium, high-converting, responsive SaaS landing page built under the Phase 1
+"Next-Gen AI Platform Speed Run" brief. Built with **Next.js 16 (App Router) +
+TypeScript + Tailwind v4 + custom CSS**. No external UI or animation component
+libraries — every interaction and transition is written from scratch using native
+CSS Transitions / Animations and the DOM API.
 
-First, run the development server:
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (fully static)
+npm start        # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How the scored requirements are met
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Feature 1 — Matrix-driven pricing + performance-isolated currency switcher
+- All prices derive from a **multi-dimensional config matrix** in
+  [`app/lib/pricing.ts`](app/lib/pricing.ts):
+  `price = baseRate × fx[currency] × tariff[currency] × (annual ? 0.8 : 1)`.
+  Nothing is hardcoded in the markup — the initial USD/monthly strings are
+  computed and server-rendered (crawlable).
+- **State isolation:** [`app/components/Pricing.tsx`](app/components/Pricing.tsx)
+  holds **zero React state**. Currency, billing cycle, and dropdown open-state
+  live in `useRef`s; toggling them mutates **only the targeted price text nodes**
+  (and each control's own active marker) via direct `textContent` / attribute
+  writes. React never re-renders the component or any parent → no global reflow.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Feature 2 — Bento grid → Accordion with resize context-lock (zero deps)
+- [`app/components/Features.tsx`](app/components/Features.tsx) renders **one DOM
+  tree** that CSS reshapes: a 6-column bento grid on desktop, a touch accordion
+  below the `760px` breakpoint.
+- The accordion's open/close uses the native **`grid-template-rows: 0fr → 1fr`**
+  transition (no JS height measuring, no libraries). Desktop detail reveals use
+  opacity/transform only — **no layout thrash**.
+- **Context lock:** a `matchMedia` listener detects the breakpoint crossing and
+  transfers the last-hovered desktop node index into the accordion's open state
+  (and back), so the matching panel is already open after the reflow.
 
-## Learn More
+### SEO & semantic HTML
+- Semantic landmarks: `<header> <main> <section> <article> <footer> <nav> <figure>`.
+- Full metadata in [`app/layout.tsx`](app/layout.tsx): title template, description,
+  keywords, canonical, Open Graph + Twitter cards, robots.
+- Generated PNG OG/Twitter images ([`app/opengraph-image.tsx`](app/opengraph-image.tsx),
+  [`app/twitter-image.tsx`](app/twitter-image.tsx)) via `next/og`.
+- `robots.txt`, `sitemap.xml`, and JSON-LD structured data.
+- Accessible image `alt`, ARIA on interactive controls, skip-link, focus-visible.
 
-To learn more about Next.js, take a look at the following resources:
+### Loading sequence & motion
+- [`app/components/Loader.tsx`](app/components/Loader.tsx) runs a `460ms` entry veil
+  (< 500ms cap) over already-rendered, crawlable HTML — it never blocks TTI.
+- Motion tokens in [`app/globals.css`](app/globals.css):
+  micro-interactions `175ms ease-out`, structural reflows `360ms ease-in-out`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Swapping in the official asset package
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The design is fully tokenized so the provided assets drop in with minimal edits:
 
-## Deploy on Vercel
+| Asset | Where to change |
+| --- | --- |
+| **Color palette** | the hex values in `:root` of [`app/globals.css`](app/globals.css) |
+| **Fonts (2 families)** | the two loaders in [`app/layout.tsx`](app/layout.tsx) — keep the `--font-display-src` / `--font-body-src` variable names (use `next/font/local` for self-hosted files) |
+| **SVG pack** | drop into `public/` and reference, or replace the inline glyphs in [`app/components/Icons.tsx`](app/components/Icons.tsx) |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Optimized for Vercel (zero-config) but works on any platform that runs Next.js.
+
+```bash
+npm i -g vercel
+vercel        # preview deploy
+vercel --prod # production deploy
+```
