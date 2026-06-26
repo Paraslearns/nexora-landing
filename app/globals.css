@@ -1071,6 +1071,147 @@ section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
 .proof__stat dt { font-variant-numeric: tabular-nums; }
 
 /* ============================================================
+   COMMAND CENTER — 3D particle sphere
+   ============================================================ */
+.command { position: relative; overflow: hidden; }
+.command__stage {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  grid-template-areas:
+    "copy sphere"
+    "prompt sphere";
+  align-items: center;
+  gap: 1.6rem 3rem;
+}
+.command__copy { grid-area: copy; align-self: end; }
+.command__prompt { grid-area: prompt; align-self: start; }
+.command__sphere {
+  grid-area: sphere;
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1 / 1;
+  justify-self: center;
+  align-self: center;
+}
+.command__sphere::before {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, var(--accent-soft), transparent 62%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+.sphere-canvas { width: 100%; height: 100%; display: block; }
+
+.command__cursorlabel {
+  position: absolute;
+  top: 26%;
+  right: 12%;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--noir);
+  background: var(--accent);
+  border-radius: 8px 8px 8px 2px;
+  box-shadow: 0 8px 20px -10px var(--accent);
+  animation: floaty 5s var(--ease-reflow) infinite;
+  pointer-events: none;
+}
+.command__cursorlabel::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -7px;
+  width: 0; height: 0;
+  border: 5px solid transparent;
+  border-bottom-color: var(--accent);
+  transform: rotate(-30deg);
+}
+@keyframes floaty {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-8px, 10px); }
+}
+
+.command__prompt {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.45rem 0.45rem 1.1rem;
+  background: var(--bg-700);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  max-width: 440px;
+  transition: border-color var(--t-micro) var(--ease-micro);
+}
+.command__prompt:focus-within { border-color: var(--accent); }
+.command__prompt input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  color: var(--fg);
+  font: inherit;
+  font-size: 0.9rem;
+  outline: none;
+}
+.command__prompt input::selection { background: var(--accent); color: var(--noir); }
+.command__send {
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  flex: none;
+  border-radius: 50%;
+  color: var(--noir);
+  background: linear-gradient(100deg, var(--forsythia), var(--saffron));
+  transition: transform var(--t-micro) var(--ease-micro);
+}
+.command__send:hover { transform: scale(1.06); }
+
+.command__pillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.6rem);
+  list-style: none;
+  margin: clamp(2.4rem, 5vw, 4rem) 0 0;
+  padding: clamp(2rem, 4vw, 3rem) 0 0;
+  border-top: 1px solid var(--line);
+}
+.pillar__icon {
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  border-radius: 11px;
+  background: var(--accent-soft);
+  color: var(--accent-2);
+  margin-bottom: 0.9rem;
+}
+.pillar__title { font-size: 1.02rem; margin-bottom: 0.5rem; }
+.pillar__desc { font-size: 0.86rem; }
+
+@media (max-width: 880px) {
+  .command__stage {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "sphere"
+      "copy"
+      "prompt";
+    gap: 1.4rem;
+    text-align: center;
+    justify-items: center;
+  }
+  .command__copy { align-self: auto; }
+  .command__prompt { align-self: auto; width: 100%; }
+  .command__pillars { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .command__pillars { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    GIANT FOOTER WORDMARK
    ============================================================ */
 .footer-word {
