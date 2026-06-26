@@ -1,14 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { JetBrains_Mono, Inter } from "next/font/google";
 import "./globals.css";
 
 /* ------------------------------------------------------------------
-   TWO PRIMARY FONT FAMILIES (placeholders for the asset fontlist).
-   Display  -> headings        | Body -> running text.
-   To swap for the provided fonts: replace these two loaders (or
-   self-host via next/font/local) and keep the CSS var names.
+   TWO PRIMARY FONT FAMILIES (from the asset fontlist):
+   JetBrains Mono -> headers/code aesthetic | Inter -> body & UI.
    ------------------------------------------------------------------ */
-const fontDisplay = Space_Grotesk({
+const fontDisplay = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-display-src",
@@ -70,7 +68,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#05060a",
+  themeColor: "#0e1a21",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,

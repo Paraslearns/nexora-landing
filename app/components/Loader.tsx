@@ -47,8 +47,8 @@ export default function Loader() {
         <svg viewBox="0 0 48 48" width="48" height="48" aria-hidden>
           <defs>
             <linearGradient id="ld" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="#7c5cff" />
-              <stop offset="1" stopColor="#19e3c2" />
+              <stop offset="0" stopColor="#ffc801" />
+              <stop offset="1" stopColor="#ff9932" />
             </linearGradient>
           </defs>
           <path

@@ -16,8 +16,8 @@ export function renderOgImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "linear-gradient(135deg, #080a12 0%, #05060a 100%)",
-          fontFamily: "sans-serif",
+          background: "linear-gradient(135deg, #172b36 0%, #0e1a21 100%)",
+          fontFamily: "monospace",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
@@ -26,29 +26,29 @@ export function renderOgImage() {
               width: 64,
               height: 64,
               borderRadius: 16,
-              background: "#11141f",
-              border: "1px solid #232838",
+              background: "#0e1a21",
+              border: "1px solid #244853",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#19e3c2",
+              color: "#ffc801",
               fontSize: 40,
               fontWeight: 700,
             }}
           >
             N
           </div>
-          <div style={{ color: "#f4f6fb", fontSize: 40, fontWeight: 700 }}>Nexora</div>
+          <div style={{ color: "#f1f6f4", fontSize: 40, fontWeight: 700 }}>Nexora</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ color: "#f4f6fb", fontSize: 74, fontWeight: 700, lineHeight: 1.05 }}>
+          <div style={{ color: "#f1f6f4", fontSize: 68, fontWeight: 700, lineHeight: 1.08 }}>
             Automate your entire
           </div>
-          <div style={{ color: "#7c5cff", fontSize: 74, fontWeight: 700, lineHeight: 1.05 }}>
+          <div style={{ color: "#ffc801", fontSize: 68, fontWeight: 700, lineHeight: 1.08 }}>
             data pipeline with AI.
           </div>
-          <div style={{ color: "#a6adc2", fontSize: 30, marginTop: 26 }}>
+          <div style={{ color: "#a7bebc", fontSize: 28, marginTop: 26, fontFamily: "sans-serif" }}>
             Ingest · Enrich · Orchestrate — millions of records in real time, zero ops.
           </div>
         </div>
@@ -58,14 +58,15 @@ export function renderOgImage() {
             <div
               key={t}
               style={{
-                color: "#19e3c2",
+                color: "#ff9932",
                 fontSize: 24,
                 fontWeight: 600,
                 padding: "12px 22px",
                 borderRadius: 999,
-                border: "1px solid #232838",
-                background: "#0a0c14",
+                border: "1px solid #244853",
+                background: "#172b36",
                 display: "flex",
+                fontFamily: "sans-serif",
               }}
             >
               {t}

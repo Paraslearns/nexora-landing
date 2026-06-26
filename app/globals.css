@@ -7,25 +7,34 @@
    Swap the hex values in :root and the font vars in layout.tsx.
    ============================================================ */
 :root {
-  /* --- Color palette (placeholder; swap with asset_package palette) --- */
-  --bg-900: #05060a;          /* page background, deepest */
-  --bg-800: #0a0c14;          /* elevated background */
-  --bg-700: #11141f;          /* card background */
-  --bg-600: #181c2b;          /* card hover */
-  --line: #232838;            /* hairline borders */
-  --line-soft: #1a1e2c;
+  /* --- Official asset palette (MP025) ---
+     Oceanic Noir #172B36 · Nocturnal Expedition #114C5A · Arctic Powder #F1F6F4
+     Mystic Mint #D9E8E2 · Forsythia #FFC801 · Deep Saffron #FF9932            */
+  --noir: #172b36;            /* Oceanic Noir   */
+  --nocturnal: #114c5a;       /* Nocturnal Expedition */
+  --powder: #f1f6f4;          /* Arctic Powder  */
+  --mint: #d9e8e2;            /* Mystic Mint    */
+  --forsythia: #ffc801;       /* Forsythia      */
+  --saffron: #ff9932;         /* Deep Saffron   */
 
-  --fg: #f4f6fb;              /* primary text */
-  --fg-muted: #a6adc2;       /* secondary text */
-  --fg-dim: #6b7185;         /* tertiary text */
+  --bg-900: #0e1a21;          /* page background (darker shade of Oceanic Noir) */
+  --bg-800: #142530;          /* elevated background */
+  --bg-700: #172b36;          /* card background = Oceanic Noir */
+  --bg-600: #1e3a45;          /* card hover (toward Nocturnal) */
+  --line: #244853;            /* hairline borders (muted Nocturnal) */
+  --line-soft: #1b333e;
 
-  --accent: #7c5cff;         /* primary brand accent (violet) */
-  --accent-2: #19e3c2;       /* secondary accent (mint) */
-  --accent-3: #ff7847;       /* tertiary accent (warm) */
-  --accent-soft: rgba(124, 92, 255, 0.14);
+  --fg: #f1f6f4;             /* primary text = Arctic Powder */
+  --fg-muted: #a7bebc;       /* secondary text (mint-gray) */
+  --fg-dim: #6e8784;         /* tertiary text */
 
-  --good: #2ee6a6;
-  --warn: #ffb020;
+  --accent: #ffc801;         /* primary brand accent = Forsythia */
+  --accent-2: #ff9932;       /* secondary accent = Deep Saffron */
+  --accent-3: #114c5a;       /* tertiary accent = Nocturnal teal */
+  --accent-soft: rgba(255, 200, 1, 0.13);
+
+  --good: #6fbfa8;           /* palette-adjacent mint-teal */
+  --warn: #ff9932;
 
   /* --- Motion tokens (per brief constraints) --- */
   --t-micro: 175ms;                                 /* hovers / toggles: 150–200ms */
@@ -41,7 +50,7 @@
   --maxw: 1200px;
 
   /* Font family hooks (real fonts injected via layout.tsx CSS vars) */
-  --font-display: var(--font-display-src), "Inter", system-ui, sans-serif;
+  --font-display: var(--font-display-src), ui-monospace, "JetBrains Mono", "SFMono-Regular", monospace;
   --font-body: var(--font-body-src), "Inter", system-ui, sans-serif;
 }
 
@@ -112,7 +121,7 @@ img, svg { display: block; max-width: 100%; }
   border-radius: 4px;
 }
 
-::selection { background: var(--accent); color: #fff; }
+::selection { background: var(--accent); color: var(--noir); }
 
 /* ============================================================
    LAYOUT HELPERS
@@ -136,7 +145,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--accent-2);
 }
 
-.section-title { font-size: clamp(1.9rem, 1rem + 3.4vw, 3.1rem); }
+.section-title { font-size: clamp(1.55rem, 1rem + 2.3vw, 2.4rem); }
 .muted { color: var(--fg-muted); }
 
 /* Gradient text utility */
@@ -257,11 +266,11 @@ img, svg { display: block; max-width: 100%; }
 .btn:hover svg { transform: translateX(2px); }
 
 .btn--primary {
-  background: linear-gradient(100deg, var(--accent), #9a7dff);
-  color: #fff;
-  box-shadow: 0 6px 24px -8px var(--accent);
+  background: linear-gradient(100deg, var(--forsythia), var(--saffron));
+  color: var(--noir);
+  box-shadow: 0 6px 24px -10px var(--saffron);
 }
-.btn--primary:hover { box-shadow: 0 10px 30px -8px var(--accent); }
+.btn--primary:hover { box-shadow: 0 10px 30px -10px var(--saffron); }
 
 .btn--ghost {
   background: var(--bg-700);
@@ -337,7 +346,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
 }
 .hero__title {
-  font-size: clamp(2.5rem, 1rem + 6vw, 4.4rem);
+  font-size: clamp(1.95rem, 1rem + 4.1vw, 3.3rem);
   margin: 1.1rem 0 1.25rem;
 }
 .hero__sub { font-size: clamp(1rem, 0.95rem + 0.4vw, 1.18rem); max-width: 34ch; }
@@ -594,7 +603,7 @@ section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
   color: var(--fg-muted);
   transition: color var(--t-micro) var(--ease-micro);
 }
-.seg button[aria-pressed="true"] { color: #fff; }
+.seg button[aria-pressed="true"] { color: var(--noir); }
 .seg__thumb {
   position: absolute;
   z-index: 0;
@@ -603,8 +612,8 @@ section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
   left: 4px;
   width: calc(50% - 4px);
   border-radius: 999px;
-  background: linear-gradient(100deg, var(--accent), #9a7dff);
-  box-shadow: 0 6px 18px -8px var(--accent);
+  background: linear-gradient(100deg, var(--forsythia), var(--saffron));
+  box-shadow: 0 6px 18px -8px var(--saffron);
   transition: transform var(--t-micro) var(--ease-micro);
 }
 .seg[data-billing="annual"] .seg__thumb { transform: translateX(100%); }
@@ -613,7 +622,7 @@ section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
   font-weight: 700;
   padding: 0.1rem 0.35rem;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.18);
+  background: color-mix(in srgb, var(--noir) 18%, transparent);
 }
 
 /* Currency dropdown (custom, accessible, no library) */
@@ -720,7 +729,7 @@ section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
   padding: 0.25rem 0.6rem;
   border-radius: 999px;
   background: linear-gradient(100deg, var(--accent), var(--accent-2));
-  color: #05060a;
+  color: var(--noir);
 }
 .tier__name { font-size: 1.3rem; }
 .tier__blurb { margin-top: 0.45rem; font-size: 0.9rem; min-height: 2.6em; }
@@ -787,7 +796,7 @@ section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
   width: 40px; height: 40px; flex: none;
   border-radius: 50%;
   font-size: 0.8rem; font-weight: 700;
-  color: #05060a;
+  color: var(--noir);
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
 }
 .quote__by strong { display: block; font-size: 0.92rem; }
@@ -819,7 +828,7 @@ section { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
   background: radial-gradient(circle, var(--accent-soft), transparent 65%);
   pointer-events: none;
 }
-.cta__title { position: relative; font-size: clamp(1.8rem, 1rem + 3.4vw, 3rem); }
+.cta__title { position: relative; font-size: clamp(1.5rem, 1rem + 2.4vw, 2.3rem); }
 .cta__sub { position: relative; max-width: 48ch; margin: 1rem auto 0; font-size: 1.05rem; }
 .cta__actions { position: relative; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.8rem; }
 
